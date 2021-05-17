@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1 align="center">JQuery ajax</h1>
+	<h3>개요</h3>
+	<p>JQuery를 이용하면 브라우저 호환성을 고려하지 않아도 편리하게 ajax를 사용할 수 있다.</p>
+	<h3>simple string ajax</h3>
+	<input type="text" name="name" id="param">
+	<button id="sendServer">서버로 전송</button>
+	<br>
+	<p id="result"></p>
+	<script>
+		$("#sendServer").click(function(){
+			
+			const name = $("#param").val();
+			
+			$.ajax({
+				// open에 대한 내용
+				url:"/chap02/jquery",
+				data:{ name : name }, // key(parameter속성명:getParameter(name)) : value
+				method:"GET",
+				// status change에 대한 내용
+				success:function(data,textStatus,xhr){
+					// call-back함수 {응답 내용}
+					// 매개변수는 변수명보다 위치가 중요함
+					// data:결과값 받아주는 역할, textStatus:상태값, xhr:request객체에 대한 모든 정보 값
+					$("#result").text(data);
+					console.log(textStatus);
+					console.log(xhr);
+				},
+				error:function(xhr,status,error){
+					console.log(xhr);
+					console.log(status);
+					console.log(error);
+				}
+			})
+		});
+	</script>
+</body>
+</html>
